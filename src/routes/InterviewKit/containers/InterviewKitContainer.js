@@ -5,39 +5,59 @@ import { connect } from 'react-redux'
 import { switchView } from '../modules/view'
 import ViewEnums from '../enums/ViewEnums'
 
-const handleClick = (e) => {
-  console.log(e)
-  switchView(e.id)
-}
+class InterviewKit extends React.Component {
+  constructor (props) {
+    super(props)
+    this.handleNewInterviewClick = this.handleNewInterviewClick.bind(this)
+    this.handleLibraryClick = this.handleLibraryClick.bind(this)
+    this.handleDraftsClick = this.handleDraftsClick.bind(this)
+    this.handleClick = this.handleClick.bind(this)
+  }
 
-const InterviewKit = ({ switchView, view }) => (
-  <div className='row'>
-    <div className='col-md-2'>
-      <Menu>
-        <MenuItem
-          iconName='new-text-box'
-          text='New Interview'
-          id={ViewEnums.NEW_INTERVIEW}
-          onClick={handleClick} />
-        <MenuItem
-          iconName='box'
-          text='Library'
-          id={ViewEnums.LIBRARY}
-          onClick={handleClick} />
-        <MenuItem
-          iconName='clipboard'
-          text='Drafts'
-          id={ViewEnums.DRAFTS}
-          onClick={handleClick} />
-        <MenuDivider />
-        <MenuItem text='Settings...' iconName='cog' />
-      </Menu>
-    </div>
-    <div className='col-md-10'>
-      <p> {view} </p>
-    </div>
-  </div>
-)
+  handleClick (view) {
+    this.props.switchView(view)
+  }
+
+  handleNewInterviewClick () {
+    this.handleClick(ViewEnums.NEW_INTERVIEW)
+  }
+
+  handleLibraryClick () {
+    this.handleClick(ViewEnums.LIBRARY)
+  }
+
+  handleDraftsClick () {
+    this.handleClick(ViewEnums.DRAFTS)
+  }
+
+  render () {
+    return (
+      <div className='row'>
+        <div className='col-md-2'>
+          <Menu>
+            <MenuItem
+              iconName='new-text-box'
+              text='New Interview'
+              onClick={this.handleNewInterviewClick} />
+            <MenuItem
+              iconName='box'
+              text='Library'
+              onClick={this.handleLibraryClick} />
+            <MenuItem
+              iconName='clipboard'
+              text='Drafts'
+              onClick={this.handleDraftsClick} />
+            <MenuDivider />
+            <MenuItem text='Settings...' iconName='cog' />
+          </Menu>
+        </div>
+        <div className='col-md-10'>
+          <p> {this.props.view} </p>
+        </div>
+      </div>
+    )
+  }
+}
 
 InterviewKit.propTypes = {
   switchView: PropTypes.func,

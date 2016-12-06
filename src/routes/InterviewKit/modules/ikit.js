@@ -1,4 +1,6 @@
-import { SWITCH_VIEW, view } from './view'
+import update from 'react-addons-update'
+
+import { SWITCH_VIEW } from './view'
 
 const initial = {
   library: [],
@@ -7,10 +9,20 @@ const initial = {
   view: 'LIBRARY'
 }
 
+function view (state, action) {
+  switch (action.type) {
+    case SWITCH_VIEW:
+      return update(state, {
+        view: { $set: action.newView }
+      })
+    default:
+      return state
+  }
+}
+
 export default function interviewkit (state = initial, action) {
   switch (action.type) {
     case SWITCH_VIEW:
-      console.log(action)
       return view(state, action)
     default:
       return state
