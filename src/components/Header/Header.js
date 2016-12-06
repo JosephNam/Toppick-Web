@@ -12,6 +12,10 @@ export const Header = () => (
     <Link to='/interviewkit' activeClassName='route--active'>
       Interview Kit
     </Link>
+    {' · '}
+    <Link to='/workspace' activeClassName='route--active'>
+      Workspace
+    </Link>
   </div>
 )
 

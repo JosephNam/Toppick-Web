@@ -65,7 +65,7 @@ InterviewKit.propTypes = {
 }
 
 const mapStateToProps = (state) => ({
-  view: state.view
+  view: state.interviewkit.view
 })
 
 const mapDispatchToProps = (dispatch) => ({
